@@ -15,46 +15,43 @@ class _OthersState extends State<Others> {
   Widget build(BuildContext context) {
     return ListView(
         children: [
+          // 右側にアイコンを表示するため、ListTileを使う
+          const ListTile(
+            title: Text('User Name'),
+            subtitle: Text('user_id'),
+            trailing: Icon(Icons.account_circle_outlined),
+          ),
           ListTile(
             leading: const Icon(Icons.lightbulb),
-            title: const Text('アカウント名を変更する'),
-            subtitle: const Text('アカウント名を変更することができます。'),
+            title: const Text('ユーザー名変更'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeUsernamePage()));
             },
           ),
-          const Divider(),
           ListTile(
             leading: const Icon(Icons.lightbulb),
-            title: const Text('ログイン情報'),
-            subtitle: const Text('ログインに必要な情報を確認することができます。'),
+            title: const Text('ログイン情報確認'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => LoginInfoPage()));
             },
           ),
-          const Divider(),
           ListTile(
             leading: const Icon(Icons.lightbulb),
             title: const Text('利用規約'),
-            subtitle: const Text('利用規約を確認することができます。'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => TermsOfServicePage()));
             },
           ),
-          const Divider(),
           ListTile(
             leading: const Icon(Icons.lightbulb),
             title: const Text('プライバシーポリシー'),
-            subtitle: const Text('プライバシーポリシーを確認することができます。'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => PrivacyPolicyPage()));
             },
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.lightbulb),
             title: const Text('ログアウト'),
-            subtitle: const Text('ログアウトすることができます。'),
             onTap: () {
               showModalBottomSheet<void>(
                 context: context,
@@ -83,7 +80,6 @@ class _OthersState extends State<Others> {
               );
             },
           ),
-          const Divider(),
         ],
       );
   }

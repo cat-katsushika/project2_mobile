@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:project2_mobile/const/colors.dart';
+
 class MySearchBar extends StatelessWidget {
   final TextEditingController controller;
   final VoidCallback onSearch;
@@ -11,25 +13,24 @@ class MySearchBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.grey[200],
+        color: colors['surface-variant'],
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
         children: [
+          const Icon(Icons.dehaze_sharp),
+          const SizedBox(width: 8),
           Expanded(
             child: TextField(
               controller: controller,
               decoration: const InputDecoration(
-                hintText: 'Search...',
+                hintText: '検索',
                 border: InputBorder.none,
               ),
               onSubmitted: (_) => onSearch(),
             ),
           ),
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: onSearch,
-          ),
+          const Icon(Icons.search),
         ],
       ),
     );
