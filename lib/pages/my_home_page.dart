@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project2_mobile/components/my_home_page/my_floating_action_button.dart';
-import 'package:project2_mobile/components/search_bar.dart';
-import 'package:project2_mobile/components/others_list.dart';
 import 'package:project2_mobile/components/bottom_navigation_bar.dart';
-import 'package:project2_mobile/components/my_teams_list.dart';
+import 'package:project2_mobile/components/my_home_page/index_1.dart';
+import 'package:project2_mobile/components/my_home_page/index_0.dart';
+import 'package:project2_mobile/components/my_home_page/index_2.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -16,12 +16,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   static final List<Widget>  _widgetOptions = <Widget>[
-    const MyTeamsList(),
-    MySearchBar( // Add this line
-      controller: TextEditingController(),
-      onSearch: () {},
-    ),
-    const Others(),
+    Index0(),
+    Index1(),
+    Index2(),
   ];
 
   void _onItemTapped(int index) {
