@@ -54,7 +54,7 @@ class Top extends ConsumerWidget {
     final AsyncValue<bool> asyncLoginState = ref.watch(loggedInStateProvider);
     return asyncLoginState.when(
       data: (isLoggedIn) => isLoggedIn ? const MyHomePage() : LoginPage(),
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const Text('読み込み中です...'),
       error: (error, stack) => Text('エラーが発生しました: $error'), // 本番ではエラーをログに記録しログインページへリダイレクトするなどの処理を行う
     );
   }
