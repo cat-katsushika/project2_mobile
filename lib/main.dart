@@ -15,7 +15,7 @@ void main() {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.deepPurple,
-            brightness: Brightness.dark,
+            brightness: Brightness.light,
           ),
           useMaterial3: true,
         ),

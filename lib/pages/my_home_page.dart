@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project2_mobile/components/my_home_page/add_team_view.dart';
 import 'package:project2_mobile/components/my_home_page/my_floating_action_button.dart';
 import 'package:project2_mobile/components/bottom_navigation_bar.dart';
-import 'package:project2_mobile/components/my_home_page/my_team_list_view/my_teams_list.dart';
 import 'package:project2_mobile/components/my_home_page/team_search_view.dart';
 import 'package:project2_mobile/components/my_home_page/my_team_list_view.dart';
 import 'package:project2_mobile/components/my_home_page/others_view.dart';
