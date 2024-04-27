@@ -9,33 +9,10 @@ class MyBottomNavigationBar extends StatelessWidget {
     required this.onItemTapped,
   });
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return BottomNavigationBar(
-  //     items: const <BottomNavigationBarItem>[
-  //       BottomNavigationBarItem(
-  //         icon: Icon(Icons.home),
-  //         label: '',
-  //       ),
-  //       BottomNavigationBarItem(
-  //         icon: Icon(Icons.search),
-  //         label: '',
-  //       ),
-  //       BottomNavigationBarItem(
-  //         icon: Icon(Icons.settings),
-  //         label: '',
-  //       ),
-  //     ],
-  //     currentIndex: selectedIndex,
-  //     selectedItemColor: Colors.amber[800],
-  //     onTap: onItemTapped,
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
-      backgroundColor: const Color(0xFFF2ECF4),
+      backgroundColor: Colors.white,
       onDestinationSelected: onItemTapped,
       indicatorColor: const Color(0xFFE9DEF8),
       selectedIndex: selectedIndex,

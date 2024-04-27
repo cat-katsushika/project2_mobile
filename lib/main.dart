@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:project2_mobile/pages/loading_page.dart';
 
 import 'package:project2_mobile/pages/my_home_page.dart';
 import 'package:project2_mobile/pages/login_page.dart';
@@ -54,7 +55,7 @@ class Top extends ConsumerWidget {
     final AsyncValue<bool> asyncLoginState = ref.watch(loggedInStateProvider);
     return asyncLoginState.when(
       data: (isLoggedIn) => isLoggedIn ? const MyHomePage() : LoginPage(),
-      loading: () => const Text('読み込み中です...'),
+      loading: () => LoadingPage(),
       error: (error, stack) => Text('エラーが発生しました: $error'), // 本番ではエラーをログに記録しログインページへリダイレクトするなどの処理を行う
     );
   }

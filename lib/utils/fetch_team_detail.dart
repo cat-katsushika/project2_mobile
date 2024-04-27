@@ -11,7 +11,7 @@ Future<TeamDetail> fetchTeamDetail(String id) async {
     "task": {
       "id": "b22157a3-5951-48c4-b6fa-721b17d55d45",
       "user": "test_user2",
-      "created_at": "2023-09-13T21:43:49+09:00"
+      "created_at": "2024-05-13T21:43:49+09:00"
     },
     "continuation_count": 12,
     "users": [

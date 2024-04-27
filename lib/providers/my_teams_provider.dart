@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:project2_mobile/models/team.dart';
 import 'package:project2_mobile/utils/token_refresh.dart';
 
-part 'team_provider.g.dart';
+part 'my_teams_provider.g.dart';
 
 
 @riverpod

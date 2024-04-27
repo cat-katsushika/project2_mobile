@@ -13,7 +13,7 @@ class MySearchBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: colors['surface-variant'],
+        color: const Color(0xFFE9DEF8),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(

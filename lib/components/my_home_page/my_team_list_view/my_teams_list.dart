@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:project2_mobile/models/team.dart';
-import 'package:project2_mobile/providers/team_provider.dart';
-import 'package:project2_mobile/pages/team_detail_page.dart';
+import 'package:project2_mobile/providers/my_teams_provider.dart';
 
 class MyTeamsList extends ConsumerWidget {
-  const MyTeamsList({super.key});
+  final Function changeIsDetail;
+  const MyTeamsList({super.key, required this.changeIsDetail});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +23,7 @@ class MyTeamsList extends ConsumerWidget {
               itemCount: value.length,
               itemBuilder: (context, index) {
                 final team = value[index];
-                return TeamCard(team: team);
+                return TeamCard(team: team, changeIsDetail: changeIsDetail);
               },
             );
           }
@@ -37,8 +37,9 @@ class MyTeamsList extends ConsumerWidget {
 
 class TeamCard extends StatelessWidget {
   final Team team;
+  Function changeIsDetail;
 
-  const TeamCard({super.key, required this.team});
+  TeamCard({super.key, required this.team, required this.changeIsDetail});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class TeamCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           // チーム詳細画面へ遷移
-          Navigator.push(context, MaterialPageRoute(builder: (context) => TeamDetailPage(team: team)));
+          changeIsDetail(team);
         },
         child: Column(
           children: <Widget>[

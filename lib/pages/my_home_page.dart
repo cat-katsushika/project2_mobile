@@ -17,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static final List<Widget>  _widgetOptions = <Widget>[
     MyTeamListView(),
-    const TeamSearchView(),
+    TeamSearchView(),
     OthersView(),
   ];
 
@@ -30,6 +30,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text('たすくぼんばー'),
+        ),
+      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -37,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
       ),
-      floatingActionButton: _selectedIndex == 0
+      floatingActionButton: _selectedIndex == 1
           ? const MyFloatingActionButton()
           : null,
     );
