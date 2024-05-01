@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project2_mobile/components/my_home_page/my_team_list_view/my_teams_list.dart';
-import 'package:project2_mobile/components/my_home_page/my_team_list_view/team_detail_page.dart';
+import 'package:project2_mobile/components/my_home_page/my_team_list_view/team_detail_view.dart';
 import 'package:project2_mobile/models/team.dart';
 
 class MyTeamListView extends StatefulWidget {
@@ -24,7 +24,7 @@ class _MyTeamListViewState extends State<MyTeamListView> {
   @override
   Widget build(BuildContext context) {
     if (_isDetail) {
-      return TeamDetailPage(team: team, changeIsDetail: _toggleDetail);
+      return TeamDetailView(team: team, changeIsDetail: _toggleDetail);
     }
     else {
       return MyTeamsList(changeIsDetail: _toggleDetail);

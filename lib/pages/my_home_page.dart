@@ -35,8 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text('たすくぼんばー'),
         ),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _widgetOptions,
       ),
       bottomNavigationBar: MyBottomNavigationBar(
         selectedIndex: _selectedIndex,

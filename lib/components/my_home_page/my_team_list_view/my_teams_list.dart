@@ -11,7 +11,6 @@ class MyTeamsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<List<Team>> teams = ref.watch(myTeamsProvider);
-        
     return Center(
       child: teams.when(
         data: (value) {
