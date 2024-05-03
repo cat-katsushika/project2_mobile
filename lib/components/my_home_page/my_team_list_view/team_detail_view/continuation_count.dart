@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project2_mobile/const/colors.dart';
 
 class ContinuationCount extends StatelessWidget {
   const ContinuationCount({Key? key, required this.continuationCount})
@@ -10,21 +11,31 @@ class ContinuationCount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const Chip(
-          avatar: Icon(Icons.repeat),
-          label: Text('継続回数'),
+        Chip(
+          avatar: const Icon(Icons.repeat),
+          label: Text(
+            '継続回数',
+            style: Theme.of(context).textTheme.labelLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
         ),
         const SizedBox(height: 10),
         Container(
           width: 91,
           height: 72,
           decoration: BoxDecoration(
-            color: Colors.grey[100], // 灰色の背景
+            color: CustomColors.surfaceContainer, // 灰色の背景
             borderRadius: BorderRadius.circular(10), // 角丸
           ),
           child: Center(
             child:
-                Text(continuationCount, style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
+                Text(
+                  continuationCount, 
+                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                    color: CustomColors.onSurfaceContainer,
+                  ),
+                ),
           ),
         ),
       ],

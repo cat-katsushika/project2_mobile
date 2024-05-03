@@ -14,7 +14,7 @@ Future<List<Team>> myTeams(MyTeamsRef ref) async {
   final results = [
     {
       "id": "c1c61f36-6032-4d39-a649-6ad16ee4f00c",
-      "name" : "統計の勉強を10分",
+      "name" : "統計の勉強を50分",
       "description" : "統計の勉強を10分取り組んだらOKです"
     }
   ];

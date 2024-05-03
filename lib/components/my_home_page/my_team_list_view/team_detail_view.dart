@@ -55,14 +55,27 @@ class TeamDetailView extends StatelessWidget {
                 CountdownWidget(
                     startTime:
                         DateTime.now().subtract(const Duration(hours: 12))),
+                const SizedBox(height: 20),
                 const Divider(),
                 Padding(
-                    padding: const EdgeInsets.only(right: 20.0),
+                    padding: const EdgeInsets.only(right: 20.0, top: 10.0, bottom: 30.0),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          FilledButton(
-                              onPressed: () {}, child: const Text('完了して次の人にパス'))
+                          SizedBox(
+                              width: 189,
+                              height: 40,
+                              child: FilledButton(
+                              onPressed: () {},
+                              child: Text(
+                                '完了して次の人にパス',
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                ),
+                              )
+                              ),
+                          ),
+                          
                         ]))
               ],
             ),

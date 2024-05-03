@@ -14,7 +14,12 @@ class UserList extends StatelessWidget {
       children: <Widget>[
         Chip(
           avatar: const Icon(Icons.play_arrow_outlined),
-          label: Text('$usernameの番'),
+          label: Text(
+            '$usernameの番',
+            style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
         ),
         const SizedBox(height: 20),
         Center(
@@ -24,17 +29,15 @@ class UserList extends StatelessWidget {
               final isCurrentTurn = user.username == username;
               return CircleAvatar(
                 backgroundColor: isCurrentTurn
-                    ? Theme.of(context).colorScheme.primary
+                    ? Theme.of(context).colorScheme.surfaceTint
                     : null,
-                radius: 22.0, // アイコンのサイズ
+                radius: 20.0, // アイコンのサイズ
                 child: CircleAvatar(
-                  radius: 20.0, // 内側の円のサイズ
+                  radius: 18.0, // 内側の円のサイズ
                   child: Text(
                     user.username[0].toUpperCase(),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
-                      color: Colors.black,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                   ),
                 ),

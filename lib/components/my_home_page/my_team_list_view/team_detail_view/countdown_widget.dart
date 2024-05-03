@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:project2_mobile/const/colors.dart';
+import 'package:project2_mobile/const/text_styles.dart';
 
 class CountdownWidget extends StatefulWidget {
   final DateTime startTime;
@@ -62,9 +64,14 @@ class _CountdownWidgetState extends State<CountdownWidget> {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Chip(
-                avatar: Icon(Icons.hourglass_empty_outlined),
-                label: Text('残り時間'),
+              Chip(
+                avatar: const Icon(Icons.hourglass_empty_outlined),
+                label: Text(
+                  '残り時間',
+                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
               ),
               const SizedBox(height: 8),
               // Text(
@@ -78,30 +85,29 @@ class _CountdownWidgetState extends State<CountdownWidget> {
                     width: 64,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: Colors.grey[100], // 灰色の背景
+                      color: CustomColors.surfaceContainer, // 灰色の背景
                       borderRadius: BorderRadius.circular(10), // 角丸
                     ),
                     child: Center(
                       child: Text(_formatDurationHours(_remainingTime),
-                          style: const TextStyle(
-                              fontSize: 48, fontWeight: FontWeight.bold)),
+                          style: CustomTextStyles.countdownText,),
                     ),
                   ),
                   const Text(':',
-                      style:
-                          TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
+                      style: CustomTextStyles.countdownText,
+                  ),
                   Container(
                     width: 64,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: Colors.grey[100], // 灰色の背景
+                      color: CustomColors.surfaceContainer, // 灰色の背景
                       borderRadius: BorderRadius.circular(10), // 角丸
                     ),
                     child: Center(
                       child: Text(_formatDurationMinutes(_remainingTime),
-                          style: const TextStyle(
-                              fontSize: 48, fontWeight: FontWeight.bold)),
+                          style: CustomTextStyles.countdownText,
                     ),
+                  ),
                   ),
                 ],
               ),

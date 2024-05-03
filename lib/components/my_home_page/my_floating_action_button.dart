@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project2_mobile/providers/my_team_list_provider.dart';
+
 
 class MyFloatingActionButton extends StatelessWidget {
   const MyFloatingActionButton({Key? key}) : super(key: key);
@@ -22,15 +24,17 @@ class MyFloatingActionButton extends StatelessWidget {
   }
 }
 
-class BottomSheetForm extends StatefulWidget {
-  const BottomSheetForm({Key? key}) : super(key: key);
+class BottomSheetForm extends ConsumerStatefulWidget {
+  const BottomSheetForm({super.key});
 
   @override
-  _BottomSheetFormState createState() => _BottomSheetFormState();
+  ConsumerState<BottomSheetForm> createState() => _BottomSheetFormState();
 }
 
-class _BottomSheetFormState extends State<BottomSheetForm> {
+class _BottomSheetFormState extends ConsumerState<BottomSheetForm> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _teamNameController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +65,14 @@ class _BottomSheetFormState extends State<BottomSheetForm> {
                   ),
                   Expanded(
                     child: TextFormField(
+                      controller: _teamNameController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Team Name',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                          return 'チーム名を入力してください';
                         }
                         return null;
                       },
@@ -78,19 +83,20 @@ class _BottomSheetFormState extends State<BottomSheetForm> {
               const SizedBox(height: 20.0),
               Row(
                 children: [
-                  const Icon(Icons.people),
+                  const Icon(Icons.notes),
                   const SizedBox(
                     width: 20.0,
                   ),
                   Expanded(
                     child: TextFormField(
+                      controller: _descriptionController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Description',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                          return 'チームの説明を入力してください';
                         }
                         return null;
                       },
@@ -102,15 +108,25 @@ class _BottomSheetFormState extends State<BottomSheetForm> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  FilledButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
-                      }
-                    },
-                    child: const Text('作成'),
+                  SizedBox(
+                    width: 77,
+                    height: 40,
+                    child: FilledButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          ref.read(myTeamListProvider.notifier).createTeam(name: _teamNameController.text, description: _descriptionController.text);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Processing Data')),
+                          );
+                        }
+                      },
+                      child: Text(
+                        '作成',
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -6,7 +6,7 @@ part of 'logged_in_state_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loggedInStateHash() => r'ef6e3d23223a8d798aa29e257e194f03dcb465f4';
+String _$loggedInStateHash() => r'793d4e7090f435b51f6f84a0b2c8acc554ff6bdd';
 
 /// See also [LoggedInState].
 @ProviderFor(LoggedInState)

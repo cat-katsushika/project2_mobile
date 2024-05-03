@@ -28,6 +28,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('新規登録'),
@@ -37,6 +39,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextFormField(
                 controller: _usernameController,
@@ -51,6 +54,9 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   return null;
                 },
               ),
+              
+              const SizedBox(height: 16),
+
               TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(
@@ -76,6 +82,9 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   return null;
                 },
               ),
+              
+              const SizedBox(height: 16),
+              
               TextFormField(
                 controller: _passwordController2,
                 decoration: InputDecoration(
@@ -105,7 +114,10 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                 },
               ),
               const SizedBox(height: 16),
-              FilledButton(
+              SizedBox(
+                width: double.infinity,
+                height: 40,
+                child: FilledButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     ref
@@ -135,8 +147,13 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                     ? const CircularProgressIndicator()
                     : const Text('登録する'),
               ),
+              ),
+
+              SizedBox(height: screenHeight * 0.2),
+              
               SizedBox(
                 width: double.infinity,
+                height: 40,
                 child: OutlinedButton(
                   onPressed: () {
                     GoRouter.of(context).go('/login');

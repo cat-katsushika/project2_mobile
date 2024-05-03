@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-Map colors = <String, Color>{
-  'surface-variant': const Color(0xff49454E),
-};
+class CustomColors {
+  static const Color surfaceContainer = Color(0xFFF2ECF4);
+  static const Color onSurfaceContainer = Color(0xFF1F182B);
+}

@@ -25,11 +25,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext contexts) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              const SizedBox(height: 100),
               Form(
                 key: _formKey,
                 child: Column(
@@ -77,6 +81,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     const SizedBox(height: 16),
                     SizedBox(
                       width: double.infinity,
+                      height: 40,
                       child: FilledButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -110,14 +115,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ],
                 ),
               ),
+              
+              SizedBox(height: screenHeight * 0.2),
+              
               SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      GoRouter.of(context).go('/sign_up');
-                    },
-                    child: const Text('新しいアカウントを作成'),
-                  ))
+                width: double.infinity,
+                height: 40,
+                child: OutlinedButton(
+                  onPressed: () {
+                    GoRouter.of(context).go('/sign_up');
+                  },
+                  child: const Text('新しいアカウントを作成'),
+                ),
+              ),
+              const SizedBox(height: 32),
             ],
           )),
     );

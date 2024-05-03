@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project2_mobile/const/colors.dart';
 
 class ChangeUsernamePage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: CustomColors.surfaceContainer,
         title: const Text('ユーザー名変更'),
       ),
       body: Padding(
@@ -24,6 +26,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
               TextFormField(
                 controller: _usernameController,
                 decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
                   labelText: '新しいユーザー名',
                 ),
                 validator: (value) {
@@ -34,7 +37,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                 },
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
+              FilledButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(

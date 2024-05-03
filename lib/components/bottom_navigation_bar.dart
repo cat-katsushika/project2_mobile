@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project2_mobile/const/colors.dart';
 
 class MyBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
@@ -12,22 +13,21 @@ class MyBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
-      backgroundColor: Colors.white,
+      backgroundColor: CustomColors.surfaceContainer,
       onDestinationSelected: onItemTapped,
-      indicatorColor: const Color(0xFFE9DEF8),
+      indicatorColor: Theme.of(context).colorScheme.secondaryContainer,
       selectedIndex: selectedIndex,
-      destinations: const <Widget>[
+      destinations: <Widget>[
         NavigationDestination(
-          selectedIcon: Icon(Icons.home),
-          icon: Icon(Icons.home_outlined),
+          icon: Icon(Icons.home, color: Theme.of(context).colorScheme.onSecondaryContainer),
           label: '',
         ),
         NavigationDestination(
-          icon: Icon(Icons.search),
+          icon: Icon(Icons.search, color: Theme.of(context).colorScheme.onSecondaryContainer),
           label: '',
         ),
         NavigationDestination(
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.settings, color: Theme.of(context).colorScheme.onSecondaryContainer),
           label: '',
         ),
       ],

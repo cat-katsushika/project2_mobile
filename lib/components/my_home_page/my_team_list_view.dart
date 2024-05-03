@@ -4,7 +4,8 @@ import 'package:project2_mobile/components/my_home_page/my_team_list_view/team_d
 import 'package:project2_mobile/models/team.dart';
 
 class MyTeamListView extends StatefulWidget {
-  const MyTeamListView({Key? key}) : super(key: key);
+  const MyTeamListView({Key? key, required this.changeParentState}) : super(key: key);
+  final Function(bool) changeParentState;
 
   @override
   State<MyTeamListView> createState() => _MyTeamListViewState();
@@ -18,6 +19,7 @@ class _MyTeamListViewState extends State<MyTeamListView> {
     setState(() {
       _isDetail = !_isDetail;
       this.team = team;
+      widget.changeParentState(_isDetail);
     });
   }
 

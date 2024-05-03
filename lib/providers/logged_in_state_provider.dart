@@ -12,36 +12,39 @@ part 'logged_in_state_provider.g.dart';
 class LoggedInState extends _$LoggedInState {
   @override
   Future<bool> build() async {
-    await Future.delayed(const Duration(seconds: 2));
-    return true;
-    // const storage = FlutterSecureStorage();
-    // final String? userId = await storage.read(key: 'userId');
-    // final String? username = await storage.read(key: 'username');
-    // final String? password = await storage.read(key: 'password');
-    // if (userId != null && username != null && password != null) {
-    //   final response = await http.post(
-    //     Uri.http('localhost:8000', '/v1/users/login/')
-    //   );
-    //   if (response.statusCode == 200) {
-    //     final jsonString = utf8.decode(response.bodyBytes); // UTF-8でデコード
-    //     final json = jsonDecode(jsonString) as Map<String, dynamic>;
-    //     await storage.write(key: 'access', value: json['access']);
-    //     await storage.write(key: 'refresh', value: json['refresh']);
-    //     return true;
-    //   }
-    //   else {
-    //     return false;
-    //   }
-    // }
-    // else {
-    //   return false;
-    // }
+    // // Djangoを使わない場合
+    // await Future.delayed(const Duration(seconds: 2));
+    // return true;
+
+    // Djangoを使う場合
+    const storage = FlutterSecureStorage();
+    final String? userId = await storage.read(key: 'userId');
+    final String? username = await storage.read(key: 'username');
+    final String? password = await storage.read(key: 'password');
+    if (userId != null && username != null && password != null) {
+      final response = await http.post(
+        Uri.http(Url.host, '/v1/users/login/')
+      );
+      if (response.statusCode == 200) {
+        final jsonString = utf8.decode(response.bodyBytes); // UTF-8でデコード
+        final json = jsonDecode(jsonString) as Map<String, dynamic>;
+        await storage.write(key: 'access', value: json['access']);
+        await storage.write(key: 'refresh', value: json['refresh']);
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
   }
 
   Future<bool> signUp (String username, String password) async {
     const storage = FlutterSecureStorage();
     final response = await http.post(
-      Uri.http(urls["host"], '/v1/users/create/'),
+      Uri.http(Url.host, '/v1/users/create/'),
       body: {
         'username': username,
         'password': password,
@@ -67,7 +70,7 @@ class LoggedInState extends _$LoggedInState {
   Future<bool> logIn (String username, String password) async {
     const storage = FlutterSecureStorage();
     final response = await http.post(
-      Uri.http(urls["host"], '/v1/users/login/'),
+      Uri.http(Url.host, '/v1/users/login/'),
       body: {
         'username': username,
         'password': password,
