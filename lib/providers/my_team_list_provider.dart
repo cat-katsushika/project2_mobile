@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:project2_mobile/models/team.dart';
+import 'package:project2_mobile/teams/models/team.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:project2_mobile/utils/token_refresh.dart';
+import 'package:project2_mobile/users/view_models/token_refresh.dart';
 
 
 part 'my_team_list_provider.g.dart';

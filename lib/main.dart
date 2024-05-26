@@ -5,12 +5,11 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:project2_mobile/pages/loading_page.dart';
 
-import 'package:project2_mobile/pages/my_home_page.dart';
-import 'package:project2_mobile/pages/login_page.dart';
-import 'package:project2_mobile/pages/sign_up_page.dart';
-import 'package:project2_mobile/providers/logged_in_state_provider.dart';
+import 'package:project2_mobile/users/screens/my_home_page.dart';
+import 'package:project2_mobile/users/screens/login_page.dart';
+import 'package:project2_mobile/users/screens/sign_up_page.dart';
+import 'package:project2_mobile/users/switchers/top_page_switcher.dart';
 
 myColorScheme() {
   return const ColorScheme(
@@ -85,6 +84,7 @@ void main() {
     ),
   );
 }
+
 final router = GoRouter(
     routes: [
       GoRoute(
@@ -107,17 +107,11 @@ final router = GoRouter(
   );
 
 
-
-class Top extends ConsumerWidget {
-  const Top({Key? key}) : super(key: key);
+class Top extends StatelessWidget {
+  const Top({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<bool> asyncLoginState = ref.watch(loggedInStateProvider);
-    return asyncLoginState.when(
-      data: (isLoggedIn) => isLoggedIn ? const MyHomePage() : LoginPage(),
-      loading: () => LoadingPage(),
-      error: (error, stack) => Text('エラーが発生しました: $error'), // 本番ではエラーをログに記録しログインページへリダイレクトするなどの処理を行う
-    );
+  Widget build(BuildContext context) {
+    return const TopPageSwitcher();
   }
 }
