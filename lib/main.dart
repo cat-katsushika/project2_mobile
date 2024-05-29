@@ -91,18 +91,18 @@ final router = GoRouter(
         path: '/',
         builder: (context, state) => const Top(),
       ),
-      GoRoute(
-          path: '/sign_up',
-          builder: (BuildContext context, GoRouterState state) => SignUpPage(),
-      ),
-      GoRoute(
-        path: '/login',
-        builder: (BuildContext context, GoRouterState state) => LoginPage(),
-      ),
-      GoRoute(
-        path: '/my_home',
-        builder: (BuildContext context, GoRouterState state) => const MyHomePage(),
-      )
+      // GoRoute(
+      //     path: '/sign_up',
+      //     builder: (BuildContext context, GoRouterState state) => SignUpPage(),
+      // ),
+      // GoRoute(
+      //   path: '/login',
+      //   builder: (BuildContext context, GoRouterState state) => LoginPage(),
+      // ),
+      // GoRoute(
+      //   path: '/my_home',
+      //   builder: (BuildContext context, GoRouterState state) => const MyHomePage(),
+      // )
     ],
   );
 

@@ -94,7 +94,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 )
                                 .then((result) {
                               if (result) {
-                                GoRouter.of(context).go('/my_home');
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('ログインが完了しました')),
                                 );
