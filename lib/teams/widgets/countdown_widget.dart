@@ -82,7 +82,7 @@ class _CountdownWidgetState extends State<CountdownWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 64,
+                    width: 68,
                     height: 80,
                     decoration: BoxDecoration(
                       color: CustomColors.surfaceContainer, // 灰色の背景
@@ -97,7 +97,7 @@ class _CountdownWidgetState extends State<CountdownWidget> {
                       style: CustomTextStyles.countdownText,
                   ),
                   Container(
-                    width: 64,
+                    width: 68,
                     height: 80,
                     decoration: BoxDecoration(
                       color: CustomColors.surfaceContainer, // 灰色の背景

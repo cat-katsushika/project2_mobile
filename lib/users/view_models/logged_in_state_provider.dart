@@ -18,12 +18,13 @@ class LoggedInState extends _$LoggedInState {
   @override
   Future<bool> build() async {
     const storage = FlutterSecureStorage();
-    final String? userId = await storage.read(key: 'userId');
     final String? username = await storage.read(key: 'username');
     final String? password = await storage.read(key: 'password');
-    if (userId != null && username != null && password != null) {
+    debugPrint('SecureStorege内: username: $username, password: $password');
+    if (username != null && password != null) {
       final response = await login(username, password);
       if (response.statusCode == 200) {
+        debugPrint('ログイン情報あり、トークン更新成功');
         String accessToken = response.data!['access'] as String;
         String refreshToken = response.data!['refresh'] as String;
         await storage.write(key: 'access', value: accessToken);
@@ -32,10 +33,12 @@ class LoggedInState extends _$LoggedInState {
       }
       // loginエンドポイントに正常にアクセスできなかった場合
       else {
+        debugPrint('ログイン情報あり、トークン更新失敗');
         return false;
       }
     }
     else {
+      debugPrint('ログイン情報なし');
       return false;
     }
   }
@@ -55,6 +58,7 @@ class LoggedInState extends _$LoggedInState {
       await storage.write(key: 'user_id', value: json['user_id']);
       await storage.write(key: 'username', value: json['username']);
       await storage.write(key: 'password', value: json['password']);
+      debugPrint('ログイン情報を保存しました');
       await future;
       state = const AsyncData(true);
       return true;
@@ -75,6 +79,9 @@ class LoggedInState extends _$LoggedInState {
       String refreshToken = response.data!['refresh'] as String;
       await storage.write(key: 'access', value: accessToken);
       await storage.write(key: 'refresh', value: refreshToken);
+      await storage.write(key: 'username', value: username);
+      await storage.write(key: 'password', value: password);
+      debugPrint('ログイン情報を保存しました');
       ref.read(topPageIndexNotifierProvider.notifier).changeIndex(1);
 
       return true;

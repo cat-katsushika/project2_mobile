@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: CustomColors.surfaceContainer,
         title: const Center(
-          child: Text('たすくぼんばー'),
+          child: Text('project2'),
         ),
       ),
       body: IndexedStack(
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
       ),
-      floatingActionButton: (_selectedIndex == 0 && !_isDetail)
+      floatingActionButton: (_selectedIndex == 1 && !_isDetail)
           ? const MyFloatingActionButton()
           : null,
     );

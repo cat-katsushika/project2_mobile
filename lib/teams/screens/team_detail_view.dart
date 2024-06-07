@@ -53,7 +53,7 @@ class TeamDetailView extends ConsumerWidget {
                 
                 CountdownWidget(
                     startTime:
-                        DateTime.now().subtract(const Duration(hours: 12))),
+                        DateTime.parse(snapshot.data!.task.createdAt)),
                 const SizedBox(height: 20),
                 const Divider(),
                 Padding(
@@ -62,7 +62,7 @@ class TeamDetailView extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           SizedBox(
-                              width: 189,
+                              width: 192,
                               height: 40,
                               child: FilledButton(
                               onPressed: () {},

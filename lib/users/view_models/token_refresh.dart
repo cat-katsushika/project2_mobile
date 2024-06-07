@@ -1,6 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:project2_mobile/shared/constants/urls.dart';
+import 'package:flutter/material.dart';
 
 
 Future<bool> updateToken() async {
@@ -11,10 +13,10 @@ Future<bool> updateToken() async {
     return false;
   }
   var response = await http.post(
-    Uri.http('localhost:8000', '/v1/users/token/refresh/'),
+    Uri.http(Urls.host, '/v1/users/token/refresh/'),
     body: <String, String>{'refresh': refresh},
   );
-  print("DEBUG: トークン更新の結果: コード: ${response.statusCode}");
+  debugPrint("DEBUG: トークン更新の結果: コード: ${response.statusCode}");
   if (response.statusCode == 200){
     final jsonString = utf8.decode(response.bodyBytes); // UTF-8でデコード
     final json = jsonDecode(jsonString) as Map<String, dynamic>;
@@ -22,12 +24,12 @@ Future<bool> updateToken() async {
     return true;
   }
   else {
-    final userId = await storage.read(key: 'userId');
+    final username = await storage.read(key: 'username');
     final password = await storage.read(key: 'password');
     final response2 = await http.post(
-      Uri.http('localhost:8000', '/v1/users/login/'),
+      Uri.http(Urls.host, '/v1/users/login/'),
       body: {
-        'user_id': userId,
+        'username': username,
         'password': password,
       }
     );
@@ -35,6 +37,7 @@ Future<bool> updateToken() async {
       final jsonString = utf8.decode(response2.bodyBytes); // UTF-8でデコード
       final json = jsonDecode(jsonString) as Map<String, dynamic>;
       await storage.write(key: 'access', value: json['access']);
+      debugPrint("DEBUG: あたらしいアクセストークン: ${json['access']}");
       await storage.write(key: 'refresh', value: json['refresh']);
       return true;
     }

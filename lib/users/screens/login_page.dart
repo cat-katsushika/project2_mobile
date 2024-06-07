@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:project2_mobile/users/screens/sign_up_page.dart';
+import 'package:project2_mobile/users/switchers/top_page_switcher.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -116,14 +118,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
               ),
               
-              SizedBox(height: screenHeight * 0.2),
-              
               SizedBox(
                 width: double.infinity,
                 height: 40,
                 child: OutlinedButton(
                   onPressed: () {
-                    GoRouter.of(context).go('/sign_up');
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignUpPage()));
                   },
                   child: const Text('新しいアカウントを作成'),
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:project2_mobile/users/switchers/top_page_index_notifier.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
@@ -28,8 +28,6 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('新規登録'),
@@ -54,9 +52,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   return null;
                 },
               ),
-              
               const SizedBox(height: 16),
-
               TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(
@@ -82,9 +78,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   return null;
                 },
               ),
-              
               const SizedBox(height: 16),
-              
               TextFormField(
                 controller: _passwordController2,
                 decoration: InputDecoration(
@@ -118,49 +112,50 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                 width: double.infinity,
                 height: 40,
                 child: FilledButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    ref
-                        .read(loggedInStateProvider.notifier)
-                        .signUp(
-                          _usernameController.text,
-                          _passwordController.text,
-                        )
-                        .then((result) {
-                      if (result) {
-                        GoRouter.of(context).go('/my_home');
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('登録が完了しました')),
-                        );
-                      }
-                    }).catchError((error) {
-                      setState(() {
-                        _isSubmitting = false;
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('登録に失敗しました: $error')),
-                      );
-                    });
-                  }
-                },
-                child: _isSubmitting
-                    ? const CircularProgressIndicator()
-                    : const Text('登録する'),
-              ),
-              ),
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      ref
+                          .read(loggedInStateProvider.notifier)
+                          .signUp(
+                            _usernameController.text,
+                            _passwordController.text,
+                          )
+                          .then((result) {
+                        if (result) {
+                          // 画面の移動
+                          ref.read(topPageIndexNotifierProvider.notifier).changeIndex(1);
+                          Navigator.pop(context);
 
-              SizedBox(height: screenHeight * 0.2),
-              
-              SizedBox(
-                width: double.infinity,
-                height: 40,
-                child: OutlinedButton(
-                  onPressed: () {
-                    GoRouter.of(context).go('/login');
+                          // 完了の通知
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('登録が完了しました')),
+                          );
+                        }
+                      }).catchError((error) {
+                        setState(() {
+                          _isSubmitting = false;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('登録に失敗しました: $error')),
+                        );
+                      });
+                    }
                   },
-                  child: const Text('新しいアカウントを作成'),
-                )
-              )
+                  child: _isSubmitting
+                      ? const CircularProgressIndicator()
+                      : const Text('新規登録'),
+                ),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('新しいアカウントを作成'),
+                  ))
             ],
           ),
         ),
