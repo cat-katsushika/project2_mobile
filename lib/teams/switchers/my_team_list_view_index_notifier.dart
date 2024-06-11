@@ -8,7 +8,6 @@ class MyTeamListViewIndexNotifier extends _$MyTeamListViewIndexNotifier {
   @override
   int build() {
     return 0;
-    // return 0;
   }
 
   void changeIndex(int index) {

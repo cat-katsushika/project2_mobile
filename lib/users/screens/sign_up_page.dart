@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project2_mobile/users/switchers/top_page_index_notifier.dart';
+import 'package:project2_mobile/users/switchers/auth_page_switcher/auth_page_name_notifier.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
@@ -122,10 +122,6 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                           )
                           .then((result) {
                         if (result) {
-                          // 画面の移動
-                          ref.read(topPageIndexNotifierProvider.notifier).changeIndex(1);
-                          Navigator.pop(context);
-
                           // 完了の通知
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('登録が完了しました')),
@@ -152,10 +148,11 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   height: 40,
                   child: OutlinedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      ref.read(authPageNameNotifierProvider.notifier).changePage("login");
                     },
-                    child: const Text('新しいアカウントを作成'),
-                  ))
+                    child: const Text('既にアカウントをお持ちの方はこちら'),
+                  )),
+              const SizedBox(height: 32),
             ],
           ),
         ),

@@ -1,6 +1,4 @@
-import 'dart:developer';
-
-import 'package:project2_mobile/users/switchers/top_page_index_notifier.dart';
+import 'package:project2_mobile/users/switchers/top_page_switcher/top_page_name_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -58,7 +56,8 @@ class LoggedInState extends _$LoggedInState {
       await storage.write(key: 'user_id', value: json['user_id']);
       await storage.write(key: 'username', value: json['username']);
       await storage.write(key: 'password', value: json['password']);
-      debugPrint('ログイン情報を保存しました');
+      debugPrint('DEBUG: from: LoggedInState signUP :ログイン情報を保存しました');
+      ref.read(topPageNameNotifierProvider.notifier).changePage("myHome");
       await future;
       state = const AsyncData(true);
       return true;
@@ -82,7 +81,7 @@ class LoggedInState extends _$LoggedInState {
       await storage.write(key: 'username', value: username);
       await storage.write(key: 'password', value: password);
       debugPrint('ログイン情報を保存しました');
-      ref.read(topPageIndexNotifierProvider.notifier).changeIndex(1);
+      ref.read(topPageNameNotifierProvider.notifier).changePage("myHome");
 
       return true;
     }
@@ -100,6 +99,6 @@ class LoggedInState extends _$LoggedInState {
     await storage.delete(key: 'password');
     await storage.delete(key: 'access');
     await storage.delete(key: 'refresh');
-    ref.read(topPageIndexNotifierProvider.notifier).changeIndex(0);
+    ref.read(topPageNameNotifierProvider.notifier).changePage("auth");
   }
 }

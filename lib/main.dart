@@ -1,15 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:project2_mobile/users/screens/my_home_page.dart';
-import 'package:project2_mobile/users/screens/login_page.dart';
-import 'package:project2_mobile/users/screens/sign_up_page.dart';
-import 'package:project2_mobile/users/switchers/top_page_switcher.dart';
+import 'package:project2_mobile/users/switchers/top_page_switcher/top_page_switcher.dart';
 
 myColorScheme() {
   return const ColorScheme(
@@ -91,18 +84,6 @@ final router = GoRouter(
         path: '/',
         builder: (context, state) => const Top(),
       ),
-      // GoRoute(
-      //     path: '/sign_up',
-      //     builder: (BuildContext context, GoRouterState state) => SignUpPage(),
-      // ),
-      // GoRoute(
-      //   path: '/login',
-      //   builder: (BuildContext context, GoRouterState state) => LoginPage(),
-      // ),
-      // GoRoute(
-      //   path: '/my_home',
-      //   builder: (BuildContext context, GoRouterState state) => const MyHomePage(),
-      // )
     ],
   );
 

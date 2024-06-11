@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:project2_mobile/users/screens/sign_up_page.dart';
-import 'package:project2_mobile/users/switchers/top_page_switcher.dart';
+import 'package:project2_mobile/users/switchers/auth_page_switcher/auth_page_name_notifier.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -28,7 +26,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext contexts) {
-    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Padding(
@@ -45,11 +42,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       controller: _usernameController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'username',
+                        labelText: 'ユーザー名',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'usernameを入力してください';
+                          return 'ユーザー名を入力してください';
                         }
                         return null;
                       },
@@ -123,8 +120,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 height: 40,
                 child: OutlinedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUpPage()));
+                    ref.read(authPageNameNotifierProvider.notifier).changePage("signup");
                   },
                   child: const Text('新しいアカウントを作成'),
                 ),

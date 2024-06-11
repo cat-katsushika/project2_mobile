@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'logged_in_state_provider.dart';
+part of 'top_page_name_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loggedInStateHash() => r'0759f678d17ca0201a7e0d47558481b26d55f0c3';
+String _$topPageNameNotifierHash() =>
+    r'bbb437d742be2324a00c84aac7981baea80c0551';
 
-/// See also [LoggedInState].
-@ProviderFor(LoggedInState)
-final loggedInStateProvider =
-    AutoDisposeAsyncNotifierProvider<LoggedInState, bool>.internal(
-  LoggedInState.new,
-  name: r'loggedInStateProvider',
+/// See also [TopPageNameNotifier].
+@ProviderFor(TopPageNameNotifier)
+final topPageNameNotifierProvider =
+    AutoDisposeNotifierProvider<TopPageNameNotifier, String>.internal(
+  TopPageNameNotifier.new,
+  name: r'topPageNameNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$loggedInStateHash,
+      : _$topPageNameNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$LoggedInState = AutoDisposeAsyncNotifier<bool>;
+typedef _$TopPageNameNotifier = AutoDisposeNotifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
