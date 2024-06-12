@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project2_mobile/teams/models/team.dart';
-import 'package:project2_mobile/teams/switchers/my_team_list_view_index_notifier.dart';
+import 'package:project2_mobile/teams/switchers/my_team_list_view_switcher/my_team_list_view_name_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/teams/view_models/selected_team_notifier.dart';
 
@@ -21,7 +21,7 @@ class MyTeamCard extends ConsumerWidget {
         child: InkWell(
           onTap: () {
             ref.read(selectedTeamNotifierProvider.notifier).changeTeam(team);
-            ref.read(myTeamListViewIndexNotifierProvider.notifier).changeIndex(1);
+            ref.read(myTeamListViewNameNotifierProvider.notifier).changeView('teamDetailView');
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

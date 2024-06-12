@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/teams/models/team_detail.dart';
 import 'package:project2_mobile/teams/services/fetch_team_detail.dart';
+import 'package:project2_mobile/teams/view_models/my_team_list_provider.dart';
 import 'package:project2_mobile/teams/view_models/selected_team_notifier.dart';
 import 'package:project2_mobile/teams/widgets/user_list.dart';
 import 'package:project2_mobile/teams/widgets/continuation_count.dart';
 import 'package:project2_mobile/teams/widgets/countdown_widget.dart';
-import 'package:project2_mobile/teams/switchers/my_team_list_view_index_notifier.dart';
+import 'package:project2_mobile/teams/switchers/my_team_list_view_switcher/my_team_list_view_name_notifier.dart';
 
 
 
@@ -24,7 +25,18 @@ class TeamDetailView extends ConsumerWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Column(
+              children: <Widget>[
+                IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    // ref.invalidate(myTeamListProvider);
+                    ref.read(myTeamListViewNameNotifierProvider.notifier).changeView('myTeamListView');
+                  },
+                ),
+                Center(child: Text('Error: ${snapshot.error}'))
+              ]
+          );
         } else if (snapshot.hasData) {
           return Center(
               child: SingleChildScrollView(
@@ -36,7 +48,7 @@ class TeamDetailView extends ConsumerWidget {
                     IconButton(
                       icon: const Icon(Icons.arrow_back),
                       onPressed: () {
-                        ref.read(myTeamListViewIndexNotifierProvider.notifier).changeIndex(0);
+                        ref.read(myTeamListViewNameNotifierProvider.notifier).changeView('myTeamListView');
                       },
                     ),
                     Text(

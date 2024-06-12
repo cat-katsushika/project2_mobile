@@ -21,7 +21,7 @@ class _CountdownWidgetState extends State<CountdownWidget> {
   void initState() {
     super.initState();
     _remainingTime =
-        Duration(hours: 24) - (DateTime.now().difference(widget.startTime));
+        const Duration(hours: 24) - (DateTime.now().difference(widget.startTime));
     _startTimer();
   }
 
