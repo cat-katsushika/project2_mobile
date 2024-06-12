@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/teams/models/team_detail.dart';
 import 'package:project2_mobile/teams/services/fetch_team_detail.dart';
+import 'package:project2_mobile/teams/services/task_done.dart';
 import 'package:project2_mobile/teams/view_models/my_team_list_provider.dart';
 import 'package:project2_mobile/teams/view_models/selected_team_notifier.dart';
 import 'package:project2_mobile/teams/widgets/user_list.dart';
@@ -17,7 +18,9 @@ class TeamDetailView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    debugPrint("DEBUG: from:TeamDetailView");
     final team = ref.watch(selectedTeamNotifierProvider);
+    debugPrint("DEBUG: from:TeamDetailView team is $team");
     final teamDetail = fetchTeamDetail(team.id);
     return FutureBuilder<TeamDetail>(
       future: teamDetail,
@@ -77,7 +80,10 @@ class TeamDetailView extends ConsumerWidget {
                               width: 192,
                               height: 40,
                               child: FilledButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                taskDone(team.id);
+                                ref.read(myTeamListViewNameNotifierProvider.notifier).changeView('myTeamListView');
+                              },
                               child: Text(
                                 '完了して次の人にパス',
                                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(

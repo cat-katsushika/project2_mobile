@@ -6,12 +6,12 @@ part of 'logged_in_state_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loggedInStateHash() => r'0759f678d17ca0201a7e0d47558481b26d55f0c3';
+String _$loggedInStateHash() => r'75bb570ecf3d2f02fabaa9da5457555812520492';
 
 /// See also [LoggedInState].
 @ProviderFor(LoggedInState)
 final loggedInStateProvider =
-    AutoDisposeAsyncNotifierProvider<LoggedInState, bool>.internal(
+    AsyncNotifierProvider<LoggedInState, bool>.internal(
   LoggedInState.new,
   name: r'loggedInStateProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -21,6 +21,6 @@ final loggedInStateProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$LoggedInState = AutoDisposeAsyncNotifier<bool>;
+typedef _$LoggedInState = AsyncNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

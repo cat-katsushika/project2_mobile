@@ -7,7 +7,7 @@ class MyTeamListViewNameNotifier extends _$MyTeamListViewNameNotifier {
   
   @override
   String build() {
-    return "";
+    return "myTeamListView";
   }
 
   void changeView(String viewName) {

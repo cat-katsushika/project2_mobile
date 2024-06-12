@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/users/switchers/auth_page_switcher/auth_page_name_notifier.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
+import 'package:project2_mobile/shared/constants/colors.dart';
+
 
 class SignUpPage extends ConsumerStatefulWidget {
   @override
@@ -31,6 +33,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('新規登録'),
+        backgroundColor: CustomColors.surfaceContainer,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

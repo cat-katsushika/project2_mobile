@@ -5,6 +5,7 @@ import 'package:project2_mobile/terms_and_conditions/screens/privacy_policy_page
 import 'package:project2_mobile/terms_and_conditions/screens/terms_of_service_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
+import 'package:project2_mobile/users/widgets/user_info_list_tile.dart';
 
 class Others extends ConsumerStatefulWidget {
   const Others({super.key});
@@ -21,20 +22,7 @@ class OthersState extends ConsumerState<Others> {
     return ListView(
       children: [
         // 右側にアイコンを表示するため、ListTileを使う
-        ListTile(
-          title: Text('User Name'),
-          subtitle: Text('user_id'),
-          trailing: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            radius: 20.0, // 内側の円のサイズ
-            child: Text(
-              'A',
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-            ),
-          ),
-        ),
+        const UserInfoListTile(),
         ListTile(
           leading: const Icon(Icons.mode_edit_outlined),
           title: const Text('ユーザー名変更'),

@@ -1,32 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project2_mobile/teams/services/search_team.dart';
 import 'package:project2_mobile/teams/widgets/my_search_bar.dart';
 import 'package:project2_mobile/teams/widgets/team_card.dart';
 import 'package:project2_mobile/teams/models/team.dart';
+import 'package:project2_mobile/teams/view_models/search_team_provider.dart';
 
-class TeamSearchView extends StatefulWidget {
+class TeamSearchView extends ConsumerStatefulWidget {
   const TeamSearchView({super.key});
 
   @override
-  State<TeamSearchView> createState() => _TeamSearchViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _TeamSearchViewState();
 }
 
-class _TeamSearchViewState extends State<TeamSearchView> {
+class _TeamSearchViewState extends ConsumerState<TeamSearchView> {
   final TextEditingController controller = TextEditingController();
   bool _isLoading = false;
   List<Team> _teams = <Team>[];
 
-  void onSearch(String query) async {
+  // void onSearch(String query) async {
+  //   debugPrint('search: $query');
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+
+  //   // 検索処理
+  //   await Future.delayed(const Duration(seconds: 1));
+  //   setState(() {
+  //     // _teams = List.generate(10, (index) => Team(id: index.toString(), name: 'チーム$index', description: 'チーム$indexの説明\n$query'));
+  //     _teams = await ref.read(searchTeamProvider(query).future);
+  //     _isLoading = false;
+  //   });
+  // }
+
+    void onSearch(String query) async {
     debugPrint('search: $query');
     setState(() {
       _isLoading = true;
     });
 
-    // 検索処理
-    await Future.delayed(const Duration(seconds: 1));
-    setState(() {
-      _teams = List.generate(10, (index) => Team(id: index.toString(), name: 'チーム$index', description: 'チーム$indexの説明\n$query'));
-      _isLoading = false;
-    });
+    try {
+      final teams = await searchTeam(query);
+      setState(() {
+        _teams = teams;
+        _isLoading = false;
+      });
+    } catch (e) {
+      debugPrint('search error: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override

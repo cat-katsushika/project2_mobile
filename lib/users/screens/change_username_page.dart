@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/shared/constants/colors.dart';
+import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 
-class ChangeUsernamePage extends StatefulWidget {
+class ChangeUsernamePage extends ConsumerStatefulWidget {
+  const ChangeUsernamePage({super.key});
+
   @override
-  _ChangeUsernamePageState createState() => _ChangeUsernamePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _ChangeUsernamePageState();
 }
 
-class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
+class _ChangeUsernamePageState extends ConsumerState<ChangeUsernamePage> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
 
@@ -40,9 +45,22 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
               FilledButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('更新中です')),
-                    );
+                    ref
+                        .read(loggedInStateProvider.notifier)
+                        .changeUsername(_usernameController.text)
+                        .then((result) {
+                          debugPrint('result: $result');
+                      if (result.statusCode == 200) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('更新しました')),
+                        );
+                        ref.invalidate(loggedInStateProvider);
+                      } else if (result.statusCode == 400) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('更新に失敗しました $result')),
+                        );
+                      }
+                    });
                   }
                 },
                 child: const Text('更新する'),

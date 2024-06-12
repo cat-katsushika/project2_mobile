@@ -20,6 +20,7 @@ class MyTeamCard extends ConsumerWidget {
         width: 360,
         child: InkWell(
           onTap: () {
+            debugPrint("DEBUG: from:MyTeamCard チームカードが押されました");
             ref.read(selectedTeamNotifierProvider.notifier).changeTeam(team);
             ref.read(myTeamListViewNameNotifierProvider.notifier).changeView('teamDetailView');
           },

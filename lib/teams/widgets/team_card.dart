@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project2_mobile/teams/models/team.dart';
+import 'package:project2_mobile/teams/services/join_team.dart';
 
 class TeamCard extends StatelessWidget {
   final Team team;
@@ -67,7 +68,10 @@ class TeamCard extends StatelessWidget {
                                   height: 40,
                                   width: 77,
                                   child: FilledButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    debugPrint("DEBUG: from:TeamCard 参加ボタンが押されました");
+                                    joinTeamApi(team.id);
+                                  },
                                   child: Text(
                                     '参加',
                                     style: Theme.of(context).textTheme.labelLarge!.copyWith(

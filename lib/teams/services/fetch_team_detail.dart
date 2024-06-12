@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:project2_mobile/users/view_models/token_refresh.dart';
 
 Future<TeamDetail> fetchTeamDetail(String id) async {
+  debugPrint("DEBUG: fetchTeamDetail: チーム詳細を取得しようとしている");
+  debugPrint("DEBUG: fetchTeamDetail: チームID: $id");
 
   const storage = FlutterSecureStorage();
   final String? access = await storage.read(key: 'access');
@@ -14,6 +16,8 @@ Future<TeamDetail> fetchTeamDetail(String id) async {
     Uri.http(Urls.host, '/v1/teams/detail/$id'),
     headers: <String, String>{'Authorization': 'Bearer $access'},
   );
+
+  debugPrint("DEBUG: fetchTeamDetail: レスポンスコード: ${response.statusCode}");
 
   if (response.statusCode == 401) {
       debugPrint("DEBUG: fetchTeamDetail: チーム詳細を取得しようとしたが，認証ではじかれた");
@@ -31,6 +35,7 @@ Future<TeamDetail> fetchTeamDetail(String id) async {
   }
 
   if (response.statusCode == 200) {
+    debugPrint("DEBUG: fetchTeamDetail: チーム詳細を取得した");
     final jsonString = utf8.decode(response.bodyBytes); // UTF-8でデコード
     final json = jsonDecode(jsonString) as Map<String, dynamic>;
     return TeamDetail.fromJson(json);

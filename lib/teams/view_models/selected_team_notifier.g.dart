@@ -7,12 +7,12 @@ part of 'selected_team_notifier.dart';
 // **************************************************************************
 
 String _$selectedTeamNotifierHash() =>
-    r'6ce83dfd15e62ab5aa842f212c380b97cfd62bab';
+    r'7b2bd65de6c6ce7dbf1b46f47d0fd8cc7c25ec4d';
 
 /// See also [SelectedTeamNotifier].
 @ProviderFor(SelectedTeamNotifier)
 final selectedTeamNotifierProvider =
-    AutoDisposeNotifierProvider<SelectedTeamNotifier, Team>.internal(
+    NotifierProvider<SelectedTeamNotifier, Team>.internal(
   SelectedTeamNotifier.new,
   name: r'selectedTeamNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final selectedTeamNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$SelectedTeamNotifier = AutoDisposeNotifier<Team>;
+typedef _$SelectedTeamNotifier = Notifier<Team>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

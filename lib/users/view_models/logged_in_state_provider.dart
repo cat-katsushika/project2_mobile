@@ -1,17 +1,22 @@
 import 'package:project2_mobile/users/switchers/top_page_switcher/top_page_name_notifier.dart';
+import 'package:project2_mobile/users/view_models/username_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+
+
 
 import 'package:project2_mobile/users/services/login.dart';
 import 'package:project2_mobile/shared/constants/urls.dart';
+import 'package:project2_mobile/users/services/change_username_api.dart';
 
 
 part 'logged_in_state_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class LoggedInState extends _$LoggedInState {
   @override
   Future<bool> build() async {
@@ -100,5 +105,21 @@ class LoggedInState extends _$LoggedInState {
     await storage.delete(key: 'access');
     await storage.delete(key: 'refresh');
     ref.read(topPageNameNotifierProvider.notifier).changePage("auth");
+  }
+
+  Future<Response> changeUsername(String newUsername) async {
+    debugPrint("DEBUG: LoggedInState changeUsername: ユーザー名変更を試みる");
+    Response response = await changeUsernameApi(newUsername);
+    debugPrint("DEBUG: LoggedInState changeUsername: レスポンスコード: ${response.statusCode}");
+    if (response.statusCode == 200) {
+      const storage = FlutterSecureStorage();
+      await storage.write(key: 'username', value: newUsername);
+      
+      ref.invalidate(getUserNameProvider);
+      return response;
+    }
+    else {
+      return response;
+    }
   }
 }

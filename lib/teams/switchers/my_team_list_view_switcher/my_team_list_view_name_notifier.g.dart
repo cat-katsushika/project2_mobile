@@ -7,7 +7,7 @@ part of 'my_team_list_view_name_notifier.dart';
 // **************************************************************************
 
 String _$myTeamListViewNameNotifierHash() =>
-    r'dce34b2a8d7be24025b77fed0576ebb621d1b959';
+    r'2467d3c56d5e60761461cf014f29e736568ebb2d';
 
 /// See also [MyTeamListViewNameNotifier].
 @ProviderFor(MyTeamListViewNameNotifier)

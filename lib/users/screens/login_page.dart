@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/users/switchers/auth_page_switcher/auth_page_name_notifier.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
+import 'package:project2_mobile/shared/constants/colors.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -28,6 +29,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext contexts) {
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('ログイン'),
+        backgroundColor: CustomColors.surfaceContainer,
+      ),
       body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
