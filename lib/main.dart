@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:project2_mobile/users/switchers/top_page_switcher/top_page_switcher.dart';
+import 'package:project2_mobile/shared/app_router.dart';
 
 myColorScheme() {
   return const ColorScheme(
@@ -68,7 +68,7 @@ void main() {
   runApp(
     ProviderScope(
       child: MaterialApp.router(
-        routerConfig: router,
+        routerConfig: appRouter,
         theme: ThemeData(
           colorScheme: myColorScheme(),
           textTheme: myTextTheme(),
@@ -78,14 +78,7 @@ void main() {
   );
 }
 
-final router = GoRouter(
-    routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const Top(),
-      ),
-    ],
-  );
+
 
 
 class Top extends StatelessWidget {

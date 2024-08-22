@@ -6,6 +6,8 @@ import 'package:project2_mobile/shared/constants/colors.dart';
 
 
 class SignUpPage extends ConsumerStatefulWidget {
+  const SignUpPage({super.key});
+
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _SignUpPageState();
 }

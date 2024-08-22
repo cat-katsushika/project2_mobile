@@ -1,3 +1,4 @@
+import 'package:project2_mobile/shared/providers/flutter_secure_storage_provider.dart';
 import 'package:project2_mobile/users/switchers/top_page_switcher/top_page_name_notifier.dart';
 import 'package:project2_mobile/users/view_models/username_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -20,26 +21,36 @@ part 'logged_in_state_provider.g.dart';
 class LoggedInState extends _$LoggedInState {
   @override
   Future<bool> build() async {
-    const storage = FlutterSecureStorage();
-    final String? username = await storage.read(key: 'username');
-    final String? password = await storage.read(key: 'password');
+
+    // ユーザーネームとパスワードをSecureStorageから取得
+    final String? username = await ref.read(flutterSecureStorageControllerProvider.notifier).getValue(key: 'username');
+    final String? password = await ref.read(flutterSecureStorageControllerProvider.notifier).getValue(key: 'password');
     debugPrint('SecureStorege内: username: $username, password: $password');
+
+    // ユーザーネームとパスワードを取得できた場合
     if (username != null && password != null) {
       final response = await login(username, password);
+
+      // ログインできた場合
       if (response.statusCode == 200) {
         debugPrint('ログイン情報あり、トークン更新成功');
+
+        // トークンを取得し、SecureStorageに保存
         String accessToken = response.data!['access'] as String;
         String refreshToken = response.data!['refresh'] as String;
-        await storage.write(key: 'access', value: accessToken);
-        await storage.write(key: 'refresh', value: refreshToken);
+        await ref.read(flutterSecureStorageControllerProvider.notifier).setValue(key: 'access', value: accessToken);
+        await ref.read(flutterSecureStorageControllerProvider.notifier).setValue(key: 'refresh', value: refreshToken);
         return true;
       }
-      // loginエンドポイントに正常にアクセスできなかった場合
+
+      // ログインできなかった場合
       else {
         debugPrint('ログイン情報あり、トークン更新失敗');
         return false;
       }
     }
+
+    // ログイン情報が取得できなかった場合
     else {
       debugPrint('ログイン情報なし');
       return false;
