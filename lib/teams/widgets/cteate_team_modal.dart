@@ -63,6 +63,7 @@ class _CreateTeamModalState extends State<CreateTeamModal> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // チーム作成処理
+                      
                       Navigator.pop(context);
                     }
                   },
