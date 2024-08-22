@@ -6,14 +6,14 @@ import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart'
 import 'package:project2_mobile/shared/constants/colors.dart';
 
 
-class SignUpPage extends ConsumerStatefulWidget {
-  const SignUpPage({super.key});
+class SignUpScaffold extends ConsumerStatefulWidget {
+  const SignUpScaffold({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpScaffoldState();
 }
 
-class _SignUpPageState extends ConsumerState<SignUpPage> {
+class _SignUpScaffoldState extends ConsumerState<SignUpScaffold> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordController2 = TextEditingController();

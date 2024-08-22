@@ -1,3 +1,8 @@
+// ShellRouteで表示する画面であり，実装はScaffoldのbodyに当たるWidgetを返す．
+
+
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/teams/services/search_team.dart';
@@ -6,14 +11,14 @@ import 'package:project2_mobile/teams/widgets/team_card.dart';
 import 'package:project2_mobile/teams/models/team.dart';
 import 'package:project2_mobile/teams/view_models/search_team_provider.dart';
 
-class TeamSearchView extends ConsumerStatefulWidget {
-  const TeamSearchView({super.key});
+class TeamSearchBody extends ConsumerStatefulWidget {
+  const TeamSearchBody({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _TeamSearchViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _TeamSearchBodyState();
 }
 
-class _TeamSearchViewState extends ConsumerState<TeamSearchView> {
+class _TeamSearchBodyState extends ConsumerState<TeamSearchBody> {
   final TextEditingController controller = TextEditingController();
   bool _isLoading = false;
   List<Team> _teams = <Team>[];

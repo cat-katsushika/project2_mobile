@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:project2_mobile/teams/models/team.dart';
-import 'package:project2_mobile/teams/switchers/my_team_list_view_switcher/my_team_list_view_name_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/teams/view_models/selected_team_notifier.dart';
 
@@ -22,7 +23,7 @@ class MyTeamCard extends ConsumerWidget {
           onTap: () {
             debugPrint("DEBUG: from:MyTeamCard チームカードが押されました");
             ref.read(selectedTeamNotifierProvider.notifier).changeTeam(team);
-            ref.read(myTeamListViewNameNotifierProvider.notifier).changeView('teamDetailView');
+            context.push('/team_detail');
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

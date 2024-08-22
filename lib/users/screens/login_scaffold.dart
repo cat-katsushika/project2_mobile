@@ -5,19 +5,18 @@ import 'package:go_router/go_router.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 import 'package:project2_mobile/shared/constants/colors.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({super.key});
+class LoginScaffold extends ConsumerStatefulWidget {
+  const LoginScaffold({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginScaffoldState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
+class _LoginScaffoldState extends ConsumerState<LoginScaffold> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isObscure = true;
-  bool _isSubmitting = false;
 
   @override
   void dispose() {
@@ -104,9 +103,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 );
                               }
                             }).catchError((error) {
-                              setState(() {
-                                _isSubmitting = false;
-                              });
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('ログインに失敗しました: $error')),
                               );

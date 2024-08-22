@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 
 
-class InitialLoadingPage extends ConsumerWidget {
-  const InitialLoadingPage({super.key});
+class InitialLoadingScaffold extends ConsumerWidget {
+  const InitialLoadingScaffold({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

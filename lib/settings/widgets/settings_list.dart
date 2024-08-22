@@ -7,15 +7,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 import 'package:project2_mobile/users/widgets/user_info_list_tile.dart';
 
-class Others extends ConsumerStatefulWidget {
-  const Others({super.key});
+class SettingsList extends ConsumerStatefulWidget {
+  const SettingsList({super.key});
   @override
-  OthersState createState() => OthersState();
+  SettingsListState createState() => SettingsListState();
 
   
 }
 
-class OthersState extends ConsumerState<Others> {
+class SettingsListState extends ConsumerState<SettingsList> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;

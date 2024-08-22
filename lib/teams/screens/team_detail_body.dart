@@ -2,28 +2,36 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:project2_mobile/teams/models/team_detail.dart';
 import 'package:project2_mobile/teams/services/fetch_team_detail.dart';
 import 'package:project2_mobile/teams/services/task_done.dart';
-import 'package:project2_mobile/teams/view_models/my_team_list_provider.dart';
 import 'package:project2_mobile/teams/view_models/selected_team_notifier.dart';
 import 'package:project2_mobile/teams/widgets/user_list.dart';
 import 'package:project2_mobile/teams/widgets/continuation_count.dart';
 import 'package:project2_mobile/teams/widgets/countdown_widget.dart';
-import 'package:project2_mobile/teams/switchers/my_team_list_view_switcher/my_team_list_view_name_notifier.dart';
 
 
 
 
-class TeamDetailView extends ConsumerWidget {
-  const TeamDetailView({super.key});
+class TeamDetailBody extends ConsumerWidget {
+  const TeamDetailBody({super.key, required this.teamId});
+
+  final String teamId;
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    debugPrint("DEBUG: from:TeamDetailView");
+
+
+
+
+    debugPrint("DEBUG: from:TeamDetailBody");
     final team = ref.watch(selectedTeamNotifierProvider);
-    debugPrint("DEBUG: from:TeamDetailView team is $team");
+    debugPrint("DEBUG: from:TeamDetailBody team is $team");
     final teamDetail = fetchTeamDetail(team.id);
+    
+    
     return FutureBuilder<TeamDetail>(
       future: teamDetail,
       builder: (context, snapshot) {
@@ -35,8 +43,7 @@ class TeamDetailView extends ConsumerWidget {
                 IconButton(
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () {
-                    // ref.invalidate(myTeamListProvider);
-                    ref.read(myTeamListViewNameNotifierProvider.notifier).changeView('myTeamListView');
+
                   },
                 ),
                 Center(child: Text('Error: ${snapshot.error}'))
@@ -53,7 +60,7 @@ class TeamDetailView extends ConsumerWidget {
                     IconButton(
                       icon: const Icon(Icons.arrow_back),
                       onPressed: () {
-                        ref.read(myTeamListViewNameNotifierProvider.notifier).changeView('myTeamListView');
+                        
                       },
                     ),
                     Text(
@@ -88,8 +95,7 @@ class TeamDetailView extends ConsumerWidget {
                                 }, (error, stack) {
                                   debugPrint('ERROR: タスクの完了に失敗しました．エラー内容：$error');
                                 });
-                                ref.invalidate(myTeamListProvider);
-                                ref.read(myTeamListViewNameNotifierProvider.notifier).changeView('myTeamListView');
+                                
                               },
                               child: Text(
                                 '完了して次の人にパス',
