@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:project2_mobile/users/switchers/top_page_switcher/top_page_switcher.dart';
 import 'package:project2_mobile/shared/app_router.dart';
 
 myColorScheme() {
@@ -76,16 +75,4 @@ void main() {
       ),
     ),
   );
-}
-
-
-
-
-class Top extends StatelessWidget {
-  const Top({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const TopPageSwitcher();
-  }
 }

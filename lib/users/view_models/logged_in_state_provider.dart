@@ -1,5 +1,4 @@
 import 'package:project2_mobile/shared/providers/flutter_secure_storage_provider.dart';
-import 'package:project2_mobile/users/switchers/top_page_switcher/top_page_name_notifier.dart';
 import 'package:project2_mobile/users/view_models/username_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -57,8 +56,9 @@ class LoggedInState extends _$LoggedInState {
     }
   }
 
-  Future<bool> signUp (String username, String password) async {
-    const storage = FlutterSecureStorage();
+  Future<bool> signUp(String username, String password) async {
+
+    // ユーザー名とパスワードをPOSTリクエストで送信
     final response = await http.post(
       Uri.http(Urls.host, '/v1/users/create/'),
       body: {
@@ -66,19 +66,23 @@ class LoggedInState extends _$LoggedInState {
         'password': password,
       }
     );
+
+    // 新規作成に成功した場合
     if (response.statusCode == 201) {
       final jsonString = utf8.decode(response.bodyBytes); // UTF-8でデコード
       final json = jsonDecode(jsonString) as Map<String, dynamic>;
-      await storage.write(key: 'user_id', value: json['user_id']);
-      await storage.write(key: 'username', value: json['username']);
-      await storage.write(key: 'password', value: json['password']);
+      debugPrint('DEBUG: from: LoggedInState signUP :新規登録に成功しました $json');
+      await ref.read(flutterSecureStorageControllerProvider.notifier).setValue(key: 'user_id', value: json['id'].toString());
+      await ref.read(flutterSecureStorageControllerProvider.notifier).setValue(key: 'username', value: username);
+      await ref.read(flutterSecureStorageControllerProvider.notifier).setValue(key: 'password', value: password);
+
       debugPrint('DEBUG: from: LoggedInState signUP :ログイン情報を保存しました');
-      ref.read(topPageNameNotifierProvider.notifier).changePage("myHome");
-      await future;
       state = const AsyncData(true);
       return true;
+
+    // 新規登録に失敗した場合 (201以外のステータスコードが返された場合)
     } else {
-      // 201以外のステータスコードが返された場合、エラーをスローします。
+      // エラーをスローする
       final jsonString = utf8.decode(response.bodyBytes); // UTF-8でデコード
       final json = jsonDecode(jsonString) as Map<String, dynamic>;
       throw Exception('Failed to sign up: $json');
@@ -97,8 +101,6 @@ class LoggedInState extends _$LoggedInState {
       await storage.write(key: 'username', value: username);
       await storage.write(key: 'password', value: password);
       debugPrint('ログイン情報を保存しました');
-      ref.read(topPageNameNotifierProvider.notifier).changePage("myHome");
-
       return true;
     }
     // loginエンドポイントに正常にアクセスできなかった場合
@@ -109,13 +111,7 @@ class LoggedInState extends _$LoggedInState {
 
   Future<void> logOut() async {
     debugPrint('logOut');
-    const storage = FlutterSecureStorage();
-    await storage.delete(key: 'user_id');
-    await storage.delete(key: 'username');
-    await storage.delete(key: 'password');
-    await storage.delete(key: 'access');
-    await storage.delete(key: 'refresh');
-    ref.read(topPageNameNotifierProvider.notifier).changePage("auth");
+    ref.read(flutterSecureStorageControllerProvider.notifier).deleteAllValue();
   }
 
   Future<Response> changeUsername(String newUsername) async {

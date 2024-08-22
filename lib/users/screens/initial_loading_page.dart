@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project2_mobile/users/switchers/top_page_switcher/top_page_name_notifier.dart';
+import 'package:go_router/go_router.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 
 
@@ -14,9 +14,9 @@ class InitialLoadingPage extends ConsumerWidget {
 
     isLoggedIn.then((value) {
       if (value) {
-        ref.read(topPageNameNotifierProvider.notifier).changePage("myHome");
+        context.go('/my_team_list');
       } else {
-        ref.read(topPageNameNotifierProvider.notifier).changePage("auth");
+        context.go('/login');
       }
     });
 

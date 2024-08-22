@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project2_mobile/users/switchers/auth_page_switcher/auth_page_name_notifier.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 import 'package:project2_mobile/shared/constants/colors.dart';
 
@@ -128,6 +129,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                           .then((result) {
                         if (result) {
                           // 完了の通知
+                          context.go('/home');
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('登録が完了しました')),
                           );
@@ -153,7 +155,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   height: 40,
                   child: OutlinedButton(
                     onPressed: () {
-                      ref.read(authPageNameNotifierProvider.notifier).changePage("login");
+                      context.go('/login');
                     },
                     child: const Text('既にアカウントをお持ちの方はこちら'),
                   )),

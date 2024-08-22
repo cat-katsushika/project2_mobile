@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:project2_mobile/shared/widgets/scaffold_with_navigation_bar.dart';
-import 'package:project2_mobile/main.dart';
+import 'package:project2_mobile/teams/screens/my_team_list_page.dart';
+import 'package:project2_mobile/users/screens/initial_loading_page.dart';
 import 'package:project2_mobile/users/screens/login_page.dart';
 import 'package:project2_mobile/users/screens/sign_up_page.dart';
 
@@ -15,18 +16,18 @@ final settingsNabigatorKey = GlobalKey<NavigatorState>();
 
 final appRouter = GoRouter(
   navigatorKey: rootNabigatorKey,
-  initialLocation: '/',
+  initialLocation: '/initialLoading',
     routes: [
       GoRoute(
-        path: '/',
-        builder: (context, state) => const Top(),
+        path: '/initialLoading',
+        builder: (context, state) => const InitialLoadingPage(),
       ),
       GoRoute(
-        path: 'login',
+        path: '/login',
         builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
-        path: 'signup',
+        path: '/signup',
         builder: (context, state) => const SignUpPage(),
       ),
       StatefulShellRoute.indexedStack(
@@ -38,17 +39,32 @@ final appRouter = GoRouter(
           // Homeブランチ
           StatefulShellBranch(
             navigatorKey: homeNabigatorKey,
-            routes:[],
+            routes:[
+              GoRoute(
+                path: '/my_team_list',
+                builder: (context, state) => const MyTeamListPage(),
+              ),
+            ],
           ),
           // Searchブランチ
           StatefulShellBranch(
             navigatorKey: searchNabigatorKey,
-            routes:[],
+            routes:[
+              GoRoute(
+                path: '/search',
+                builder: (context, state) => const SignUpPage(),
+              ),
+            ],
           ),
           // Settingsブランチ
           StatefulShellBranch(
             navigatorKey: settingsNabigatorKey,
-            routes:[],
+            routes:[
+              GoRoute(
+                path: '/settings',
+                builder: (context, state) => const SignUpPage(),
+              ),
+            ],
           ),
         ]
       ),

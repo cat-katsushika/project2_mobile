@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project2_mobile/users/switchers/auth_page_switcher/auth_page_name_notifier.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 import 'package:project2_mobile/shared/constants/colors.dart';
 
@@ -26,7 +27,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext contexts) {
+  Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
@@ -125,7 +126,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 height: 40,
                 child: OutlinedButton(
                   onPressed: () {
-                    ref.read(authPageNameNotifierProvider.notifier).changePage("signup");
+                    context.go('/signup');
                   },
                   child: const Text('新しいアカウントを作成'),
                 ),

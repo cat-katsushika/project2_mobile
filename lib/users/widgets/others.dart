@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project2_mobile/users/screens/change_username_page.dart';
 import 'package:project2_mobile/users/screens/login_info_page.dart';
-import 'package:project2_mobile/terms_and_conditions/screens/privacy_policy_page.dart';
-import 'package:project2_mobile/terms_and_conditions/screens/terms_of_service_page.dart';
+import 'package:project2_mobile/settings/screens/privacy_policy_page.dart';
+import 'package:project2_mobile/settings/screens/terms_of_service_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 import 'package:project2_mobile/users/widgets/user_info_list_tile.dart';
