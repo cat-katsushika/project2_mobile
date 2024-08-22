@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/teams/models/team_detail.dart';
 import 'package:project2_mobile/teams/services/fetch_team_detail.dart';
 import 'package:project2_mobile/teams/services/task_done.dart';
-import 'package:project2_mobile/teams/view_models/selected_team_notifier.dart';
 import 'package:project2_mobile/teams/widgets/user_list.dart';
 import 'package:project2_mobile/teams/widgets/continuation_count.dart';
 import 'package:project2_mobile/teams/widgets/countdown_widget.dart';
@@ -22,14 +21,8 @@ class TeamDetailBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-
-
-
-    debugPrint("DEBUG: from:TeamDetailBody");
-    final team = ref.watch(selectedTeamNotifierProvider);
-    debugPrint("DEBUG: from:TeamDetailBody team is $team");
-    final teamDetail = fetchTeamDetail(team.id);
+    
+    final teamDetail = fetchTeamDetail(teamId);
     
     
     return FutureBuilder<TeamDetail>(
@@ -91,7 +84,7 @@ class TeamDetailBody extends ConsumerWidget {
                               child: FilledButton(
                               onPressed: () {
                                 runZonedGuarded(() {
-                                  taskDone(team.id);
+                                  taskDone(teamId);
                                 }, (error, stack) {
                                   debugPrint('ERROR: タスクの完了に失敗しました．エラー内容：$error');
                                 });

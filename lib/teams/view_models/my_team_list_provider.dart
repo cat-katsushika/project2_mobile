@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:project2_mobile/shared/providers/flutter_secure_storage_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:project2_mobile/teams/models/team.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:project2_mobile/users/view_models/token_refresh.dart';
@@ -18,11 +16,9 @@ class MyTeamList extends _$MyTeamList {
   @override
   Future<List<Team>> build() async {
 
-    // Djangoを使う場合
-    const storage = FlutterSecureStorage();
-    final String? access = await storage.read(key: 'access');
+    final String? access = await ref.read(flutterSecureStorageControllerProvider.notifier).getValue(key: 'access');
     var response = await http.get(
-      Uri.http(Urls.host, '/v1/teams/joined/'),
+      Uri.http(Urls.host, Urls.myTeamListUrl),
       headers: <String, String>{'Authorization': 'Bearer $access'},
     );
 
@@ -31,10 +27,10 @@ class MyTeamList extends _$MyTeamList {
       final bool result = await updateToken();
       debugPrint("DEBUG: MyTeamList: トークン更新の結果: $result");
       if (result) {
-        final String? access = await storage.read(key: 'access');
+        final String? access = await ref.read(flutterSecureStorageControllerProvider.notifier).getValue(key: 'access');
         debugPrint("DEBUG: MyTeamList: 新しいアクセストークン: $access");
         response = await http.get(
-          Uri.http(Urls.host, '/v1/teams'),
+          Uri.http(Urls.host, Urls.myTeamListUrl),
           headers: <String, String>{'Authorization': 'Bearer $access'},
         );
       } else {
@@ -56,10 +52,9 @@ class MyTeamList extends _$MyTeamList {
 
 
   Future<bool> createTeam({required String name, required String description}) async {
-    const storage = FlutterSecureStorage();
-    final String? access = await storage.read(key: 'access');
+    final String? access = await ref.read(flutterSecureStorageControllerProvider.notifier).getValue(key: 'access');
     final response = await http.post(
-      Uri.http('10.0.2.2:8000', '/v1/teams/create/'),
+      Uri.http(Urls.host, Urls.createTeamUrl),
       headers: <String, String>{'Authorization': 'Bearer $access'},
       body: {
         'name': name,
@@ -67,14 +62,13 @@ class MyTeamList extends _$MyTeamList {
       }
     );
     if (response.statusCode == 201) {
-      print('チームの作成に成功しました');
       ref.invalidateSelf();
       await future;
       return true;
     } 
     else {
-      print('チームの作成に失敗しました');
-      print(response.body);
+      debugPrint('チームの作成に失敗しました');
+      debugPrint(response.body);
       return false;
     }
   }

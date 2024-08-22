@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CreateTeamPage extends StatefulWidget {
+class CreateTeamModal extends StatefulWidget {
+  const CreateTeamModal({super.key});
+
   @override
-  _CreateTeamPageState createState() => _CreateTeamPageState();
+  State<CreateTeamModal> createState() => _CreateTeamModalState();
 }
 
-class _CreateTeamPageState extends State<CreateTeamPage> {
+class _CreateTeamModalState extends State<CreateTeamModal> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
@@ -19,17 +21,18 @@ class _CreateTeamPageState extends State<CreateTeamPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('新しいチームを作成する'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+    final bottomSpace = MediaQuery.of(context).viewInsets.bottom;
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: bottomSpace),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisSize: MainAxisSize.min, // コンテンツの高さに応じて縮小
             children: <Widget>[
+              const Text('新しいチームを作成する'),
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(
@@ -59,12 +62,11 @@ class _CreateTeamPageState extends State<CreateTeamPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('作成中です...')),
-                      );
+                      // チーム作成処理
+                      Navigator.pop(context);
                     }
                   },
-                  child: const Text('チームを作成する'),
+                  child: const Text('作成'),
                 ),
               ),
             ],
@@ -73,4 +75,15 @@ class _CreateTeamPageState extends State<CreateTeamPage> {
       ),
     );
   }
+}
+
+void showCreateTeamModal(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    showDragHandle: true, // ドラッグハンドルを表示
+    isScrollControlled: true, // これによりモーダルシートが全画面に広がる
+    builder: (BuildContext context) {
+      return const CreateTeamModal(); // 上記で作成したウィジェットを表示
+    },
+  );
 }

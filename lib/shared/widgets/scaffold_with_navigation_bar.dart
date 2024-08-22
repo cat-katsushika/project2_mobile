@@ -1,5 +1,8 @@
+// ボトムナブバーがあるScaffoldを作成するクラス
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:project2_mobile/teams/widgets/cteate_team_modal.dart';
 
 
 
@@ -14,6 +17,9 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title:  const Text("project2"),
+      ),
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
         selectedIndex: navigationShell.currentIndex,
@@ -29,6 +35,13 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
           );
         },
       ),
+      floatingActionButton: (navigationShell.currentIndex == 1) ? FloatingActionButton(
+        onPressed: () {
+          // チームを作成するモーダルを表示
+          showCreateTeamModal(context);
+        },
+        child: const Icon(Icons.add),
+      ) : null,
     );
   }
 }

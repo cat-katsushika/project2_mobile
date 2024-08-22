@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 
 import 'package:project2_mobile/teams/models/team.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project2_mobile/teams/view_models/selected_team_notifier.dart';
 
 
 class MyTeamCard extends ConsumerWidget {
@@ -22,8 +21,7 @@ class MyTeamCard extends ConsumerWidget {
         child: InkWell(
           onTap: () {
             debugPrint("DEBUG: from:MyTeamCard チームカードが押されました");
-            ref.read(selectedTeamNotifierProvider.notifier).changeTeam(team);
-            context.push('/team_detail');
+            context.push('/teams/${team.id}');
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
