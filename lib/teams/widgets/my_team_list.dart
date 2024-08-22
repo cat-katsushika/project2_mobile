@@ -5,8 +5,9 @@ import 'package:project2_mobile/teams/models/team.dart';
 import 'package:project2_mobile/teams/widgets/my_team_card.dart';
 import 'package:project2_mobile/teams/view_models/my_team_list_provider.dart';
 
-class MyTeamListView extends ConsumerWidget {
-  const MyTeamListView({super.key});
+
+class MyTeamList extends ConsumerWidget {
+  const MyTeamList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,7 +37,6 @@ class MyTeamListView extends ConsumerWidget {
     );
   }
 }
-
 
 
 class TeamIsNotExists extends StatelessWidget {

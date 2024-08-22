@@ -50,7 +50,6 @@ class MyTeamList extends _$MyTeamList {
     if (response.statusCode == 200) {
         final jsonString = utf8.decode(bodyBytes); // UTF-8でデコード
         final json = jsonDecode(jsonString) as Map<String, dynamic>;
-        print('自分が所属しているチーム一覧: $json');
         final results = json['results'] as List<dynamic>;
         return results.map((e) => Team.fromJson(e)).toList();
     }

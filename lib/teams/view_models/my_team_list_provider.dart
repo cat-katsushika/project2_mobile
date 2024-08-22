@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:project2_mobile/teams/models/team.dart';
@@ -16,27 +18,11 @@ class MyTeamList extends _$MyTeamList {
   @override
   Future<List<Team>> build() async {
 
-  //   // Djangoを使わない場合
-  //   final results = [
-  //     {
-  //       "id": "001",
-  //       "name" : "統計の勉強を10分",
-  //       "description" : "統計の勉強を10分取り組んだらOKです"
-  //     },
-  //     {
-  //       "id": "002",
-  //       "name" : "英語が大好きです．勉強を10分します",
-  //       "description" : "英語の勉強を10分取り組んだらOKです"
-  //     }
-  //   ];
-  //   return results.map((e) => Team.fromJson(e)).toList();
-  // }
-
     // Djangoを使う場合
     const storage = FlutterSecureStorage();
     final String? access = await storage.read(key: 'access');
     var response = await http.get(
-      Uri.http(Urls.host, '/v1/teams'),
+      Uri.http(Urls.host, '/v1/teams/joined/'),
       headers: <String, String>{'Authorization': 'Bearer $access'},
     );
 
@@ -60,8 +46,8 @@ class MyTeamList extends _$MyTeamList {
     if (response.statusCode == 200) {
         final jsonString = utf8.decode(response.bodyBytes); // UTF-8でデコード
         final json = jsonDecode(jsonString) as Map<String, dynamic>;
-        print('自分が所属しているチーム一覧: $json');
         final results = json['results'] as List<dynamic>;
+        debugPrint("DEBUG: MyTeamList: チーム一覧を取得した, results: $results");
         return results.map((e) => Team.fromJson(e)).toList();
     }
     throw Exception('Failed to load team');

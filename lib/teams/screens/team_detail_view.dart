@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/teams/models/team_detail.dart';
@@ -81,7 +83,12 @@ class TeamDetailView extends ConsumerWidget {
                               height: 40,
                               child: FilledButton(
                               onPressed: () {
-                                taskDone(team.id);
+                                runZonedGuarded(() {
+                                  taskDone(team.id);
+                                }, (error, stack) {
+                                  debugPrint('ERROR: タスクの完了に失敗しました．エラー内容：$error');
+                                });
+                                ref.invalidate(myTeamListProvider);
                                 ref.read(myTeamListViewNameNotifierProvider.notifier).changeView('myTeamListView');
                               },
                               child: Text(

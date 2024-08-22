@@ -12,13 +12,16 @@ Future<Response> taskDone(String teamId) async {
   final String? accessToken = await storage.read(key: 'access');
 
   Response response;
-  String url = 'http://${Urls.host}/v1/teams/done/${teamId}/';
+  String url = 'http://${Urls.host}/v1/teams/done/$teamId/';
   dio.options.headers["Authorization"] = "Bearer $accessToken";
   response = await dio.post(
     url,
     options: Options(
       headers: {
         'Content-Type': 'application/json',
+      },
+      validateStatus: (status) {
+        return status! < 500; // 500未満のステータスコードは例外をスローしない
       },
     ),
   );
@@ -48,5 +51,5 @@ Future<Response> taskDone(String teamId) async {
     debugPrint("DEBUG: taskDone: タスク完了を試みた");
     return response;
   }
-  throw Exception('Failed to load team');
+  throw Exception('Failed to load team, response body: ${response.data}');
 }

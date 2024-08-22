@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:project2_mobile/teams/models/team.dart';
 import 'package:project2_mobile/teams/services/join_team.dart';
 
-class TeamCard extends StatelessWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project2_mobile/teams/view_models/my_team_list_provider.dart';
+
+class TeamCard extends ConsumerWidget {
   final Team team;
 
   const TeamCard({
@@ -11,7 +14,7 @@ class TeamCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Card.outlined(
         color: Colors.transparent,
         child: SizedBox(
@@ -71,6 +74,9 @@ class TeamCard extends StatelessWidget {
                                   onPressed: () {
                                     debugPrint("DEBUG: from:TeamCard 参加ボタンが押されました");
                                     joinTeamApi(team.id);
+                                    
+                                    // 所属チームを再取得
+                                    ref.invalidate(myTeamListProvider);
                                   },
                                   child: Text(
                                     '参加',
