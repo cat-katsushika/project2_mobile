@@ -28,7 +28,7 @@ class SettingsListState extends ConsumerState<SettingsList> {
           title: const Text('ユーザー名変更'),
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ChangeUsernamePage()));
+                MaterialPageRoute(builder: (context) => const ChangeUsernamePage()));
           },
         ),
         ListTile(
@@ -36,7 +36,7 @@ class SettingsListState extends ConsumerState<SettingsList> {
           title: const Text('ログイン情報確認'),
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => LoginInfoPage()));
+                MaterialPageRoute(builder: (context) => const LoginInfoPage()));
           },
         ),
         ListTile(
@@ -44,7 +44,7 @@ class SettingsListState extends ConsumerState<SettingsList> {
           title: const Text('利用規約'),
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => TermsOfServicePage()));
+                MaterialPageRoute(builder: (context) => const TermsOfServicePage()));
           },
         ),
         ListTile(
@@ -52,7 +52,7 @@ class SettingsListState extends ConsumerState<SettingsList> {
           title: const Text('プライバシーポリシー'),
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PrivacyPolicyPage()));
+                MaterialPageRoute(builder: (context) => const PrivacyPolicyPage()));
           },
         ),
         const Divider(),

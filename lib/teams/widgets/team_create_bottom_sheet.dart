@@ -74,7 +74,7 @@ class _TeamCreateBottomSheetState extends ConsumerState<TeamCreateBottomSheet> {
           child: TextFormField(
             controller: controller,
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               labelText: labelText,
             ),
             validator: (value) {

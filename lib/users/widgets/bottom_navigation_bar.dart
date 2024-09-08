@@ -8,6 +8,7 @@ class MyBottomNavigationBar extends StatelessWidget {
   const MyBottomNavigationBar({
     required this.selectedIndex,
     required this.onItemTapped,
+    super.key,
   });
 
   @override

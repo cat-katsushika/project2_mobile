@@ -32,9 +32,9 @@ class _CountdownWidgetState extends State<CountdownWidget> {
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        _remainingTime -= Duration(seconds: 1);
+        _remainingTime -= const Duration(seconds: 1);
         if (_remainingTime.inSeconds == 0) {
           timer.cancel();
           // Handle countdown completion
@@ -121,19 +121,12 @@ class _CountdownWidgetState extends State<CountdownWidget> {
   String _formatDurationHours(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     String twoDigitHours = twoDigits(duration.inHours.remainder(24));
-    return "$twoDigitHours";
+    return twoDigitHours;
   }
 
   String _formatDurationMinutes(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    return "$twoDigitMinutes";
-  }
-
-  String _formatDuration(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    return "$twoDigitMinutes:$twoDigitSeconds";
+    return twoDigitMinutes;
   }
 }

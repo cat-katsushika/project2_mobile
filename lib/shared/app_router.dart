@@ -6,7 +6,6 @@ import 'package:project2_mobile/shared/widgets/scaffold_with_navigation_bar.dart
 import 'package:project2_mobile/teams/screens/my_team_list_body.dart';
 import 'package:project2_mobile/teams/screens/team_detail_body.dart';
 import 'package:project2_mobile/teams/screens/team_search_body.dart';
-import 'package:project2_mobile/teams/screens/team_create_body.dart';
 import 'package:project2_mobile/users/screens/initial_loading_scaffold.dart';
 import 'package:project2_mobile/users/screens/login_scaffold.dart';
 import 'package:project2_mobile/users/screens/sign_up_scaffold.dart';
@@ -65,10 +64,6 @@ final appRouter = GoRouter(
                 path: '/search',
                 builder: (context, state) => const TeamSearchBody(),
               ),
-              GoRoute(
-                path: '/create',
-                builder: (context, state) => const TeamCreateBody(),
-              )
             ],
           ),
           // Settingsブランチ
