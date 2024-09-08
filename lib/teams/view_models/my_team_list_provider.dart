@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project2_mobile/shared/providers/flutter_secure_storage_provider.dart';
+import 'package:project2_mobile/shared/services/api_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:project2_mobile/teams/models/team.dart';
 import 'package:http/http.dart' as http;
@@ -47,20 +48,18 @@ class MyTeamList extends _$MyTeamList {
         return results.map((e) => Team.fromJson(e)).toList();
     }
     throw Exception('Failed to load team');
-    }
+  }
 
 
-
+  /// 新しいチームを作成する
   Future<bool> createTeam({required String name, required String description}) async {
-    final String? access = await ref.read(flutterSecureStorageControllerProvider.notifier).getValue(key: 'access');
-    final response = await http.post(
-      Uri.http(Urls.host, Urls.createTeamUrl),
-      headers: <String, String>{'Authorization': 'Bearer $access'},
-      body: {
-        'name': name,
-        'description': description,
-      }
-    );
+
+    ApiService apiService = ApiService(ref);
+    final data = {
+      'name': name,
+      'description': description,
+    };
+    final response = await apiService.postData(Urls.createTeamUrl, data);
     if (response.statusCode == 201) {
       ref.invalidateSelf();
       await future;
@@ -68,7 +67,6 @@ class MyTeamList extends _$MyTeamList {
     } 
     else {
       debugPrint('チームの作成に失敗しました');
-      debugPrint(response.body);
       return false;
     }
   }

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CreateTeamModal extends StatefulWidget {
+import 'package:project2_mobile/teams/view_models/my_team_list_provider.dart';
+
+class CreateTeamModal extends ConsumerStatefulWidget {
   const CreateTeamModal({super.key});
 
   @override
-  State<CreateTeamModal> createState() => _CreateTeamModalState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _CreateTeamModalState();
 }
 
-class _CreateTeamModalState extends State<CreateTeamModal> {
+class _CreateTeamModalState extends ConsumerState<CreateTeamModal> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
@@ -63,6 +66,10 @@ class _CreateTeamModalState extends State<CreateTeamModal> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // チーム作成処理
+                      ref.read(myTeamListProvider.notifier).createTeam(
+                        name: _nameController.text,
+                        description: _descriptionController.text,
+                      );
                       
                       Navigator.pop(context);
                     }
