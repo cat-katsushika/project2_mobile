@@ -1,0 +1,118 @@
+import 'package:flutter/material.dart';
+import 'package:project2_mobile/users/screens/change_username_page.dart';
+import 'package:project2_mobile/users/screens/login_info_page.dart';
+import 'package:project2_mobile/settings/screens/privacy_policy_page.dart';
+import 'package:project2_mobile/settings/screens/terms_of_service_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
+import 'package:project2_mobile/users/widgets/user_info_list_tile.dart';
+import 'package:go_router/go_router.dart';
+
+class SettingsList extends ConsumerStatefulWidget {
+  const SettingsList({super.key});
+  @override
+  SettingsListState createState() => SettingsListState();
+
+  
+}
+
+class SettingsListState extends ConsumerState<SettingsList> {
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    return ListView(
+      children: [
+        // 右側にアイコンを表示するため、ListTileを使う
+        const UserInfoListTile(),
+        ListTile(
+          leading: const Icon(Icons.mode_edit_outlined),
+          title: const Text('ユーザー名変更'),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ChangeUsernamePage()));
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.person_outline),
+          title: const Text('ログイン情報確認'),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const LoginInfoPage()));
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.info_outline),
+          title: const Text('利用規約'),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const TermsOfServicePage()));
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.security),
+          title: const Text('プライバシーポリシー'),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const PrivacyPolicyPage()));
+          },
+        ),
+        const Divider(),
+        ListTile(
+          title: Text(
+            'ログアウト',
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.error,
+            ),
+          ),
+          onTap: () {
+            showModalBottomSheet<void>(
+              showDragHandle: true,
+              context: context,
+              builder: (BuildContext context) {
+                return SizedBox(
+                  height: 200,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          'ログアウトしますか？',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(
+                                width: screenWidth * 0.4,
+                                height: 40,
+                                child: OutlinedButton(
+                                  child: const Text('ログアウトする'),
+                                  onPressed: () => {
+                                    ref.read(loggedInStateProvider.notifier).logOut(),
+                                    context.go('/login'),                                  }
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              SizedBox(
+                                width: screenWidth * 0.4,
+                                height: 40,
+                                child: FilledButton(
+                                  child: const Text('キャンセル'),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              ),
+                            ]),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
