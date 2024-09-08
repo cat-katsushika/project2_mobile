@@ -6,6 +6,7 @@ import 'package:project2_mobile/settings/screens/terms_of_service_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project2_mobile/users/view_models/logged_in_state_provider.dart';
 import 'package:project2_mobile/users/widgets/user_info_list_tile.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingsList extends ConsumerStatefulWidget {
   const SettingsList({super.key});
@@ -89,9 +90,8 @@ class SettingsListState extends ConsumerState<SettingsList> {
                                 child: OutlinedButton(
                                   child: const Text('ログアウトする'),
                                   onPressed: () => {
-                                    Navigator.pop(context),
                                     ref.read(loggedInStateProvider.notifier).logOut(),
-                                  }
+                                    context.go('/login'),                                  }
                                 ),
                               ),
                               const SizedBox(width: 20),

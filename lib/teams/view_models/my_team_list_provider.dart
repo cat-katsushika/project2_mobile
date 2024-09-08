@@ -24,7 +24,7 @@ class MyTeamList extends _$MyTeamList {
         debugPrint("DEBUG: MyTeamList: チーム一覧を取得した, results: $results");
         return results.map((e) => Team.fromJson(e)).toList();
     }
-    throw Exception('Failed to load team');
+    throw Exception('チーム一覧を取得できませんでした');
   }
 
 

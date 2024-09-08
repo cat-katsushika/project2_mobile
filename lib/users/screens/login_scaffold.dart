@@ -101,6 +101,7 @@ class _LoginScaffoldState extends ConsumerState<LoginScaffold> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('ログインが完了しました')),
                                 );
+                                context.go('/my_team_list');
                               }
                             }).catchError((error) {
                               ScaffoldMessenger.of(context).showSnackBar(
