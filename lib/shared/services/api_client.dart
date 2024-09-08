@@ -63,6 +63,22 @@ class ApiService {
     ));
   }
 
+  Future<Response> getData(String endpoint) async {
+    try {
+      Response response = await dio.get(endpoint);
+      if (response.statusCode == 200) {
+        debugPrint('Success: ${response.data}');
+        return response;
+      } else {
+        debugPrint('Failed with status code: ${response.statusCode}');
+        return response;
+      }
+    } on DioException catch (e) {
+      debugPrint('Dio error: ${e.response?.statusCode} ${e.response?.data}');
+      return e.response!;
+    }
+  }
+
   Future<Response> postData(String endpoint, Map<String, dynamic> data) async {
     try {
       Response response = await dio.post(endpoint, data: data);

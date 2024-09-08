@@ -7,6 +7,8 @@ class Urls {
   static const String myTeamListUrl = '/v1/teams/joined/';
   static const String createTeamUrl = '/v1/teams/create/';
   static const String tokenRefleshUrl = '/v1/users/token/refresh/';
+  static String teamDetailUrl(String teamId) => '/v1/teams/detail/$teamId/';
 
   static String get baseUrl => '$protocol://$host';
+
 }

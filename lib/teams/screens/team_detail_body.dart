@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:project2_mobile/teams/models/team_detail.dart';
-import 'package:project2_mobile/teams/services/fetch_team_detail.dart';
 import 'package:project2_mobile/teams/services/task_done.dart';
+import 'package:project2_mobile/teams/view_models/my_team_list_provider.dart';
 import 'package:project2_mobile/teams/widgets/user_list.dart';
 import 'package:project2_mobile/teams/widgets/continuation_count.dart';
 import 'package:project2_mobile/teams/widgets/countdown_widget.dart';
@@ -23,7 +23,7 @@ class TeamDetailBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     
-    final teamDetail = fetchTeamDetail(teamId);
+    final teamDetail = ref.read(myTeamListProvider.notifier).fetchTeamDetail(teamId: teamId);
     
     
     return FutureBuilder<TeamDetail>(

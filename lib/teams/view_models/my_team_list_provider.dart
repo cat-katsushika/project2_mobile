@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project2_mobile/shared/providers/flutter_secure_storage_provider.dart';
 import 'package:project2_mobile/shared/services/api_client.dart';
+import 'package:project2_mobile/teams/models/team_detail.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:project2_mobile/teams/models/team.dart';
 import 'package:http/http.dart' as http;
@@ -68,6 +69,18 @@ class MyTeamList extends _$MyTeamList {
     else {
       debugPrint('チームの作成に失敗しました');
       return false;
+    }
+  }
+
+  Future<TeamDetail> fetchTeamDetail({required String teamId}) async {
+    ApiService apiService = ApiService(ref);
+    final response = await apiService.getData(Urls.teamDetailUrl(teamId));
+    if (response.statusCode == 200) {
+      final json = response.data as Map<String, dynamic>;
+      final teamDetail = TeamDetail.fromJson(json);
+      return teamDetail;
+    } else {
+      throw Exception('Failed to load team');
     }
   }
 
