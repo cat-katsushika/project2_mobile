@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:project2_mobile/teams/models/team_detail.dart';
 import 'package:project2_mobile/teams/services/fetch_team_detail.dart';
@@ -53,7 +54,7 @@ class TeamDetailBody extends ConsumerWidget {
                     IconButton(
                       icon: const Icon(Icons.arrow_back),
                       onPressed: () {
-                        
+                        context.go('/my_team_list');
                       },
                     ),
                     Text(
